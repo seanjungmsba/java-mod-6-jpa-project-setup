@@ -23,7 +23,11 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <!-- We will be using the create value to create and insert data into the database and
+            then use the update value for reading, updating, and deleting data.-->
+            <!-- We will be using the update value for the hbm2ddl property
+            because often times you will have to read from an existing database -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <!-- hibernate.show_sql: shows the SQL queries performed in the terminal.
                  hibernate.format_sql: formats SQL queries in the terminal to display them in an easier to read format.
                  hibernate.dialect: defines the type of database which ensures database compatible SQL queries are generated.

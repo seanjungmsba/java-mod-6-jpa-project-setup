@@ -58,4 +58,14 @@ public class Student {
         this.studentGroup = studentGroup;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dob=" + dob +
+                ", studentGroup=" + studentGroup +
+                '}';
+    }
+
 }

@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.Date;
 
-public class JpaMain {
+public class JpaCreate {
     public static void main(String[] args) {
 
         // create a new student instance
@@ -37,12 +37,14 @@ public class JpaMain {
 
         // create and use transactions
         transaction.begin();
-
         // The persist method tells the database to create and insert a student row using the data provided.
         entityManager.persist(student1);
         entityManager.persist(student2);
-
         transaction.commit();
+
+        // close entity manager
+        entityManager.close();
+        entityManagerFactory.close();
 
     }
 }
