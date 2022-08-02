@@ -1,11 +1,13 @@
 package org.example;
 
+import org.example.enums.StudentGroup;
 import org.example.models.Student;
 
 import javax.persistence.Persistence;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.Date;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -13,8 +15,14 @@ public class JpaMain {
         // create a new student instance
             // we are creating a new student instance which is a regular Java object
         Student student1 = new Student();
-        student1.setId(1);
         student1.setName("Jack");
+        student1.setDob(new Date());
+        student1.setStudentGroup(StudentGroup.LOTUS);
+
+        Student student2 = new Student();
+        student2.setName("Leslie");
+        student2.setDob(new Date());
+        student2.setStudentGroup(StudentGroup.ROSE);
 
         // create EntityManager
             // We need to use an EntityManagerFactory because we want a single instance of an EntityManager in our app.
@@ -29,7 +37,11 @@ public class JpaMain {
 
         // create and use transactions
         transaction.begin();
-        entityManager.persist(student1); // The persist method tells the database to create and insert a student row using the data provided.
+
+        // The persist method tells the database to create and insert a student row using the data provided.
+        entityManager.persist(student1);
+        entityManager.persist(student2);
+
         transaction.commit();
 
     }
