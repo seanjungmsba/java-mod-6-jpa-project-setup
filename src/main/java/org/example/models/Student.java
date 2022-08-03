@@ -18,10 +18,16 @@ public class Student {
     @Temporal(TemporalType.DATE) // @Temporal annotation is used to define how the information will be stored in the database
     private Date dob; // For production apps, you would use the LocalDate class instead of the Date class.
 
-    @Enumerated(EnumType.STRING) // We can store the value of the enum instead using the @Enumerated annotation.
+    // We can store the value of the enum instead using the @Enumerated annotation.
     //  if you want to ensure that your database values are not invalidated in the future due to order changes in the enum,
     //  use the @Enumerated annotation with the EnumType.STRING value.
+    @Enumerated(EnumType.STRING)
     private StudentGroup studentGroup;
+
+    // A one-to-one association uses the FetchType.EAGER value if no value is specified.
+    // By setting it to FetchType.LAZY, we can defer the join query.
+    @OneToOne(fetch = FetchType.LAZY)
+    private IdCard card;
 
     @Transient // @Transient annotation is used when we don’t want a property to be used for database creation.
     private String debugMessage;
@@ -56,6 +62,14 @@ public class Student {
 
     public void setStudentGroup(StudentGroup studentGroup) {
         this.studentGroup = studentGroup;
+    }
+
+    public IdCard getCard() {
+        return card;
+    }
+
+    public void setCard(IdCard card) {
+        this.card = card;
     }
 
     @Override

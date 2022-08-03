@@ -1,7 +1,9 @@
 package org.example;
 
 import org.example.enums.StudentGroup;
+import org.example.models.IdCard;
 import org.example.models.Student;
+//import org.example.models.Project;
 
 import javax.persistence.Persistence;
 import javax.persistence.EntityManagerFactory;
@@ -24,6 +26,17 @@ public class JpaCreate {
         student2.setDob(new Date());
         student2.setStudentGroup(StudentGroup.ROSE);
 
+        // create id cards
+        IdCard card1 = new IdCard();
+        card1.setActive(true);
+
+        IdCard card2 = new IdCard();
+        card2.setActive(false);
+
+        // create student-card associations
+        student1.setCard(card1);
+        student2.setCard(card2);
+
         // create EntityManager
             // We need to use an EntityManagerFactory because we want a single instance of an EntityManager in our app.
             // We also have to get the EntityTransaction object from the EntityManager because we have to define our own transactions.
@@ -40,6 +53,13 @@ public class JpaCreate {
         // The persist method tells the database to create and insert a student row using the data provided.
         entityManager.persist(student1);
         entityManager.persist(student2);
+
+        entityManager.persist(card1);
+        entityManager.persist(card2);
+
+//        entityManager.persist(project1);
+//        entityManager.persist(project2);
+
         transaction.commit();
 
         // close entity manager
